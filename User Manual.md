@@ -1,49 +1,74 @@
-# User Manual Aplikasi Inventori
+# User Manual Aplikasi Inventory untuk Beans Coffee 
+Persiapan Awal
+Buka Google Colab
+Klik "New Notebook" untuk membuat notebook baru
+Ganti nama notebook menjadi "Inventory Management System"
 
-## Deskripsi
-Aplikasi Inventori adalah program berbasis teks yang memungkinkan pengguna untuk mengelola produk dalam inventori. Pengguna dapat menambah, melihat, mengedit, dan menghapus item dari inventori.
+Langkah 1: Instalasi Package
+Di cell pertama, jalankan kode ini untuk menginstal tabulate:
 
-## Prasyarat
-- Python 3.x terinstal di sistem Anda.
-- Modul `tabulate` harus diinstal. Anda dapat menginstalnya dengan perintah berikut:
-  ```bash
-  pip install tabulate
+python
+Run
+Copy code
+!pip install tabulate
 
-  Menjalankan Aplikasi
-Simpan Kode: Salin kode aplikasi ke dalam file bernama inventory_app.py.
-Jalankan Aplikasi: Buka terminal atau command prompt, navigasikan ke direktori tempat file disimpan, dan jalankan perintah berikut:
+Langkah 2: Upload File database ke Colab
+Buat cell baru dan jalankan:
 
-Antarmuka Pengguna
-Setelah aplikasi dijalankan, Anda akan melihat menu utama dengan pilihan berikut:
+python
+2 lines
+from google.colab import files
+uploaded = files.upload()
+Klik tombol "Choose Files" dan pilih file database Anda (atau biarkan kosong untuk membuat baru).
 
-=== APLIKASI INVENTORI ===
-1. Lihat Daftar Produk
-2. Tambah Produk
-3. Edit Produk
-4. Hapus Produk
-0. Keluar
+Langkah 3: Salin Kode Aplikasi
+Buat cell baru dan salin seluruh kode aplikasi:
 
-1. Fungsi Menu
-1. Lihat Daftar Produk
-Pilih opsi 1 untuk melihat semua produk yang ada dalam inventori.
-Aplikasi akan menampilkan daftar produk dalam format tabel, termasuk ID, nama, kategori, jumlah, harga, dan waktu terakhir diperbarui.
-2. Tambah Produk
-Pilih opsi 2 untuk menambahkan produk baru.
-Anda akan diminta untuk memasukkan informasi berikut:
-Nama Produk: Nama dari produk yang ingin ditambahkan.
-Kategori: Kategori produk.
-Jumlah: Jumlah stok produk.
-Harga: Harga per item produk.
-Setelah semua informasi dimasukkan, produk akan ditambahkan ke inventori.
-3. Edit Produk
-Pilih opsi 3 untuk mengedit produk yang sudah ada.
-Aplikasi akan menampilkan daftar produk. Masukkan ID produk yang ingin diedit.
-Anda akan diminta untuk memasukkan informasi baru. Kosongkan field jika tidak ingin mengubahnya.
-Setelah selesai, perubahan akan disimpan.
-4. Hapus Produk
-Pilih opsi 4 untuk menghapus produk dari inventori.
-Aplikasi akan menampilkan daftar produk. Masukkan ID produk yang ingin dihapus.
-Anda akan diminta untuk mengonfirmasi penghapusan. Ketik y untuk menghapus atau n untuk membatalkan.
-0. Keluar
-Pilih opsi 0 untuk keluar dari aplikasi. Aplikasi akan menutup dan koneksi ke database akan ditutup.
+python
+20 lines
+import sqlite3
+from tabulate import tabulate
 
+
+Langkah 4: Menjalankan Aplikasi
+Buat cell baru dan jalankan:
+
+python
+Copy code
+app.run()  # Untuk memulai aplikasi
+
+Fitur Khusus Google Colab
+Menyimpan Database
+Untuk mendownload database dari Colab:
+
+python
+from google.colab import files
+files.download('/content/inventory.db')
+Reset Database
+Jika ingin menghapus dan mulai dari awal:
+
+python
+!rm /content/inventory.db
+3. Backup Otomatis
+Tambahkan di akhir kode:
+
+python
+import time
+def backup_db():
+Troubleshooting
+Masalah: Tidak bisa input data Solusi:
+
+Pastikan menjalankan cell input secara berurutan
+Di Colab, Anda mungkin perlu mengklik kotak input yang muncul di bawah cell
+Masalah: Database hilang setelah menutup Colab Solusi:
+
+Selalu download database setelah melakukan perubahan
+Atau simpan di Google Drive dengan kode:
+python
+from google.colab import drive
+drive.mount('/content/drive')
+
+Catatan Penting
+Google Colab akan menghapus file lokal saat runtime di-reset
+Untuk penggunaan jangka panjang, simpan database di Google Drive
+Output tabel akan ditampilkan lebih rapi di Colab dibanding terminal biasa
